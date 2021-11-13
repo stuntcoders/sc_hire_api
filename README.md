@@ -1,1 +1,1 @@
-# sc_hire_api
+# Ruby on Rails API
