@@ -1,24 +1,52 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+schema.graphql
+```
+Hiring API
 
-Things you may want to cover:
+enum Role {
+  USER
+  ADMIN
+}
 
-* Ruby version
+enum QuestionType {
+  TEXT
+  CODE
+  CHECKBOX
+  RADIO
+}
 
-* System dependencies
+union SearchResult = Candidate | Quiz | Test
 
-* Configuration
+type Quiz {
+  id: ID!
+  name: String!
+  duration: Int!
+  question: [Question!]!
+}
 
-* Database creation
 
-* Database initialization
+type Question {
+  title: String!
+  type: QuestionType!
+  Answers: String!
+}
 
-* How to run the test suite
+type Candidate {
+  email: String!
+  first_name: String!
+  last_name: String!
+}
 
-* Services (job queues, cache servers, search engines, etc.)
+type Test {
+  candidate: Candidate!
+  quiz: Quiz!
+}
 
-* Deployment instructions
-
-* ...
+type Query {
+  allQuiz(last: Int): [Candidate!]!
+  allQuestions(test_id: Int): [Question]!
+  allCandidates: [Candidate!]!
+  search(term: String!): [SearchResult!]!
+}
+```
